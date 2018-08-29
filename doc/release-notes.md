@@ -3,7 +3,7 @@ release-notes at release time)
 
 Bitcoin Core version *version* is now available from:
 
-  <https://bitcoin.org/bin/bitcoin-core-*version*/>
+  <https://bitcoincore.org/bin/bitcoin-core-*version*/>
 
 This is a new major version release, including new features, various bugfixes
 and performance improvements, as well as updated translations.
@@ -48,69 +48,19 @@ Compatibility
 ==============
 
 Bitcoin Core is extensively tested on multiple operating systems using
-the Linux kernel, macOS 10.8+, and Windows Vista and later. Windows XP is not supported.
+the Linux kernel, macOS 10.10+, and Windows 7 and newer (Windows XP is not supported).
 
 Bitcoin Core should also work on most other Unix-like systems but is not
 frequently tested on them.
 
+From 0.17.0 onwards macOS <10.10 is no longer supported. 0.17.0 is built using Qt 5.9.x, which doesn't
+support versions of macOS older than 10.10.
+
 Notable changes
 ===============
 
-GCC 4.8.x
---------------
-The minimum version of GCC required to compile Bitcoin Core is now 4.8. No effort will be
-made to support older versions of GCC. See discussion in issue #11732 for more information.
-
-HD-wallets by default
----------------------
-Due to a backward-incompatible change in the wallet database, wallets created
-with version 0.16.0 will be rejected by previous versions. Also, version 0.16.0
-will only create hierarchical deterministic (HD) wallets.
-
-Replace-By-Fee by default in GUI
---------------------------------
-The send screen now uses BIP-125 RBF by default, regardless of `-walletrbf`.
-There is a checkbox to mark the transaction as final.
-
-The RPC default remains unchanged: to use RBF, launch with `-walletrbf=1` or
-use the `replaceable` argument for individual transactions.
-
-Custom wallet directories
----------------------
-The ability to specify a directory other than the default data directory in which to store
-wallets has been added. An existing directory can be specified using the `-walletdir=<dir>`
-argument. Wallets loaded via `-wallet` arguments must be in this wallet directory. Care should be taken
-when choosing a wallet directory location, as if it becomes unavailable during operation,
-funds may be lost.
-
-Default wallet directory change
---------------------------
-On new installations (if the data directory doesn't exist), wallets will now be stored in a
-new `wallets/` subdirectory inside the data directory. If this `wallets/` subdirectory
-doesn't exist (i.e. on existing nodes), the current datadir root is used instead, as it was.
-
-Low-level RPC changes
-----------------------
-- The deprecated RPC `getinfo` was removed. It is recommended that the more specific RPCs are used:
-  * `getblockchaininfo`
-  * `getnetworkinfo`
-  * `getwalletinfo`
-  * `getmininginfo`
-- The wallet RPC `getreceivedbyaddress` will return an error if called with an address not in the wallet.
-
-Changed command-line options
------------------------------
-- `-debuglogfile=<file>` can be used to specify an alternative debug logging file.
-
-Renamed script for creating JSON-RPC credentials
------------------------------
-The `share/rpcuser/rpcuser.py` script was renamed to `share/rpcauth/rpcauth.py`. This script can be
-used to create `rpcauth` credentials for a JSON-RPC user.
-
-
-- `dumpwallet` now includes hex-encoded scripts from the wallet in the dumpfile, and
-  `importwallet` now imports these scripts, but corresponding addresses may not be added
-  correctly or a manual rescan may be required to find relevant transactions.
+Example item
+------------
 
 Credits
 =======
